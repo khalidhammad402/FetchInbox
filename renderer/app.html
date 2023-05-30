@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>FetchInbox</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/app.css">
+</head>
+<body style="-webkit-user-select: none; /* Safari */ -moz-user-select: none; /* Firefox */ -ms-user-select: none; /* IE10+/Edge */ user-select: none; /* Standard */">
+	<div class="logos">
+		<img src="images/isro.png" alt="isro-logo" id="isro-logo">
+		<img src="images/sac.png" alt="sac-logo" id="sac-logo">
+	</div>
+	<form action="" id="search-form">
+		<div class="input-div">
+			<div class="date-row">
+				<div class="wrap-input100 date-picker">
+					<input class="input100" type="text" id="from-date" placeholder="From" onfocus="(this.type='date')" onblur="(this.type='text')" onchange="document.getElementById('to-date').setAttribute('min', document.getElementById('from-date').value)" >
+					<span class="symbol-input100">
+						<i class="fa fa-calendar"></i>
+					</span>
+				</div>
+				<div class="wrap-input100 date-picker">
+					<input class="input100" type="text" id="to-date" placeholder="To" onfocus="(this.type='date')" onblur="(this.type='text')" >
+					<span class="symbol-input100">
+						<i class="fa fa-calendar"></i>
+					</span>
+				</div>
+			</div>
+			<div class="subject-div">
+				<div class="wrap-input100">
+					<input class="input100" type="text" name="subject" placeholder="Subject of the mail" id="subject" style="background-color: rgb(223, 220, 220); cursor: not-allowed;" disabled>
+					<span class="symbol-input100">
+						<i class="fa fa-envelope" aria-hidden="true"></i>
+					</span>
+				</div>
+				<div class="subject-option-div">
+					<select class="dropdown-option" id="subject-option" name="subject-option">
+						<option value="all">All</option>
+						<option value="pattern">Pattern</option>
+						<option value="specific">Specfic</option>
+						<option value="applications">Applications</option>
+					</select>
+				</div>
+			</div>
+			<div class="file-div">
+				<div class="wrap-input100" >
+					<input class="input100" type="text" name="file-name" placeholder="File name" id="file-name" style="background-color: rgb(223, 220, 220); cursor: not-allowed;" disabled>
+					<span class="symbol-input100">
+						<i class="fa fa-file-o" aria-hidden="true"></i>
+					</span>
+				</div>
+				<div class="subject-option-div">
+					<select class="dropdown-option" id="file-option" name="file-option">
+						<option value="all">All</option>
+						<option value="pattern">Pattern</option>
+						<option value="specific">Specfic</option>
+						<option value="applications">Applications</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="container-login100-form-btn">
+			<div class="search-button-div">
+				<button class="login100-form-btn" id="search-button" type="submit">
+					Search
+				</button>
+			</div>
+		</div>
+		<div class="input-div">
+			<div id="hidden-menu" style="display: none;">
+				<div class="filepath-div">
+					<div class="wrap-input100" >
+						<input class="input100" type="text" name="path" placeholder="Please select a path (default path is desktop)" id="file-path" style="cursor: pointer;">
+						<span class="symbol-input100">
+							<i class="fa fa-file-o" aria-hidden="true"></i>
+						</span>
+					</div>
+				</div>
+				<div class="menu-buttons">
+					<a class="login100-form-btn" id="download-button" >
+						Download
+					</a>
+					<a class="login100-form-btn" id="excel-button">
+						Excel
+					</a>
+				</div>
+			</div>
+		</div>
+	</form>
+	<script>
+		require('./js/app')
+	</script>
+</body>
+</html>

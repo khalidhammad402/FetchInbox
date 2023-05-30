@@ -1,0 +1,41 @@
+{
+  "name": "FetchInbox",
+  "version": "1.0.0",
+  "description": "FetchInbox project code",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "watch": "nodemon --exec electron .",
+    "reset": "git reset --hard",
+    "inspect": "electron --inspect-brk=5858 .",
+    "build": "electron-builder -w"
+  },
+  "author": "Hammad Khalid",
+  "license": "ISC",
+  "dependencies": {
+    "electron-window-state": "^5.0.3",
+    "imap": "^0.8.19",
+    "mailparser": "^3.6.4"
+  },
+  "build": {
+    "appId": "com.isro.FetchInbox",
+    "copyright": "Copyright SRTD",
+    "mac": {
+      "category": "public.app-category.utilities",
+      "target": "dmg",
+      "identity": "SAC",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "category": "Utility"
+    }
+  },
+  "devDependencies": {
+    "electron": "^24.4.0",
+    "electron-builder": "^23.6.0"
+  }
+}

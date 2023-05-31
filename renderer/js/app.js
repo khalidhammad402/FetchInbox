@@ -11,15 +11,14 @@ let fromDate = document.getElementById('from-date'),
     hiddenMenu = document.getElementById('hidden-menu'),
     filePath = document.getElementById('file-path'),
     downloadButton = document.getElementById('download-button'),
-    excelButton = document.getElementById('excel-button'),
-    folderInput = document.getElementById('folder-input')
+    excelButton = document.getElementById('excel-button')
 
 const today = new Date();   
 const todayISO = today.toISOString().split('T')[0];
 fromDate.setAttribute('max', todayISO);
 toDate.setAttribute('max', todayISO);
 
-// Toggling Buttons
+//Toggling Buttons
 const toggleSearchButton = () => {
     if (searchButton.disabled === true) {
         searchButton.disabled = false
@@ -66,15 +65,15 @@ const toggleExcelButton = () => {
 ipcRenderer.on('files-downloaded', (event, numberOfFiles)=>{
     toggleSearchButton()
     if(numberOfFiles){
-        alert(numberOfFiles+' files found!')
+        ipcRenderer.send('alert', numberOfFiles+' files found');
         hiddenMenu.style.display = 'block';
     } else {
-        alert('No files found!')
+        ipcRenderer.send('alert', 'No file found');
     }
 })
 ipcRenderer.on('no-emails', (event, args)=>{
-    toggleSearchButton()
-    alert('No files found!')
+    toggleSearchButton();
+    ipcRenderer.send('alert', 'No file found');
 })
 ipcRenderer.on('filepath-selected', (event, filepath)=>{
     if(!filepath) filepath = "";
@@ -82,11 +81,19 @@ ipcRenderer.on('filepath-selected', (event, filepath)=>{
 })
 ipcRenderer.on('download-completed', (event)=>{
     toggleDownloadButton();
-    alert("Download Completed!")
+    ipcRenderer.send('alert', 'Download completed');
 })
 ipcRenderer.on('download-failed', (event)=>{
     toggleDownloadButton();
-    alert("Download Failed!")
+    ipcRenderer.send('alert', 'Download failed');
+})
+ipcRenderer.on('excel-completed', (event)=>{
+    toggleExcelButton();
+    ipcRenderer.send('alert', 'Excel completed');
+})
+ipcRenderer.on('excel-failed', (event)=>{
+    toggleExcelButton();
+    ipcRenderer.send('alert', 'Excel failed');
 })
 
 // Event Listeners
@@ -105,7 +112,7 @@ searchForm.addEventListener('submit', event=> {
         invalid = true;
     }
     if(invalid) {
-        alert('Please fill in all required fields.');
+        ipcRenderer.send('alert', 'Please fill all the required feilds.');
         return
     }
     let imapQuery = {
@@ -134,7 +141,7 @@ downloadButton.addEventListener('click', (event)=>{
         invalid = true;
     }
     if(invalid) {
-        alert('Please fill in all required fields.');
+        ipcRenderer.send('alert', 'Please fill all the required feilds.');
         return
     }
     toggleDownloadButton();
@@ -158,11 +165,17 @@ excelButton.addEventListener('click', (event)=>{
         invalid = true;
     }
     if(invalid) {
-        alert('Please fill in all required fields.');
+        ipcRenderer.send('alert', 'Please fill all the required feilds.');
         return
     }
     toggleExcelButton();
-    ipcRenderer.send('excel-query', filePath.value)
+    excelDetails = {
+        fromDate: fromDate.value,
+        toDate: toDate.value,
+        subjectOption: subjectOption.value,
+        fileOption: fileOption.value
+    }
+    ipcRenderer.send('excel-query', excelDetails)
 })
 
 // subject-option
@@ -174,7 +187,7 @@ subjectOption.addEventListener('change', event=> {
         subject.style.cursor = 'not-allowed'
         subject.style.backgroundColor = 'rgb(223, 220, 220)';
     } else {
-        subject.style.backgroundColor = 'whitesmoke';
+        subject.style.backgroundColor = 'white';
         subject.disabled = false;
         subject.style.cursor = 'text'
         subject.focus()
@@ -190,7 +203,7 @@ fileOption.addEventListener('change', event=> {
         fileName.style.cursor = 'not-allowed'
         fileName.style.backgroundColor = 'rgb(223, 220, 220)';
     } else {
-        fileName.style.backgroundColor = 'whitesmoke';
+        fileName.style.backgroundColor = 'white';
         fileName.disabled = false;
         fileName.style.cursor = 'text'
         fileName.focus();

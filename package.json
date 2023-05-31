@@ -8,11 +8,12 @@
     "watch": "nodemon --exec electron .",
     "reset": "git reset --hard",
     "inspect": "electron --inspect-brk=5858 .",
-    "build": "electron-builder -w"
+    "build": "electron-builder -mwl"
   },
   "author": "Hammad Khalid",
   "license": "ISC",
   "dependencies": {
+    "csv-writer": "^1.6.0",
     "electron-window-state": "^5.0.3",
     "imap": "^0.8.19",
     "mailparser": "^3.6.4"

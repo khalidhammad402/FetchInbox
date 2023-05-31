@@ -36,6 +36,12 @@
   
   body, html {
       font-family: Poppins-Regular, sans-serif;
+      background-image: url('../images/bg.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+      width: 900px;
+      height: 670px;
   }
   
   /*---------------------------------------------*/
@@ -236,7 +242,7 @@
   
     display: block;
     width: 100%;
-    background-color: whitesmoke;;
+    background-color: white;
     height: 50px;
     border-radius: 5px;
     padding: 0 30px 0 68px;
@@ -326,7 +332,7 @@
     font-family: Montserrat-Bold;
     font-size: 15px;
     line-height: 1.5;
-    color: #fff;
+    color: white;
     text-transform: uppercase;
   
     width: 100%;
@@ -553,7 +559,7 @@
   font-size: 15px;
   line-height: 1.5;
   color: #666666;
-  background-color: whitesmoke;
+  background-color: white;
   display: block;
   width: 140px;
   height: 50px;
@@ -579,7 +585,7 @@
   font-size: 15px;
   line-height: 1.5;
   color: #666666;
-  background-color: whitesmoke;
+  background-color: white;
   display: block;
   width: 140px;
   height: 50px;

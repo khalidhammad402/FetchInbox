@@ -27,8 +27,13 @@ ipcRenderer.on('login-failed', (event, args)=>{
 
 loginForm.addEventListener('submit', event=> {
     event.preventDefault(); 
+    let invalid = false
     if (domain.value.trim() === '' || email.value.trim() === '' || password.value.trim() === '') {
-        alert('Please fill in all required fields.');
+        invalid = true;
+    }
+    if(invalid) {
+        ipcRenderer.send('alert', 'Please fill all the required feilds.');
+        return
     }
     let user = {
         domain: domain.value,
